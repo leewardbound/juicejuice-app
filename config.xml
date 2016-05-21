@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.example.react-cordova" version="0.0.1"
+<widget id="co.lwb.juicejuice-app" version="0.0.1"
   xmlns="http://www.w3.org/ns/widgets"
   xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>react-cordova</name>
+  <name>Juice Juice</name>
   <description>
-        React Cordova Boilerplate.
+        JuiceJuice Brain Controller
   </description>
-  <author email="rgaidot@gmail.com" href="http://regis.gaidot.net/">
-    Régis Gaidot
+  <author email="l@lwb.co" href="http://lwb.co">
+    Leeward Bound
   </author>
   <content src="index.html"/>
   <access origin="*"/>

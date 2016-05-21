@@ -1,17 +1,17 @@
 {
-  "name": "react-cordova",
+  "name": "juicejuice.brain",
   "version": "0.1.0",
-  "homepage": "https://github.com/rgaidot/react-cordova",
-  "description": "ES6 Isomorphic React app using React.js, React Router, Flux, Webpack and Cordova.",
+  "homepage": "https://github.com/linked/jj-brain",
+  "description": "Control app for JuiceJuice LEDs",
   "authors": [
-    "Régis Gaidot <rgaidot@gmail.com>"
+    "leeward bound<l@lwb.co>"
   ],
   "license": "MIT",
   "keywords": [
-    "webpack",
+    "arduino",
+    "redbear",
+    "bluetooth",
     "react",
-    "starter",
-    "boilerplate",
     "cordova"
   ],
   "author": "Régis Gaidot <rgaidot@gmail.com>",
@@ -52,8 +52,9 @@
     "jsx-loader": "^0.13.1",
     "karma": "^0.13.9",
     "karma-cli": "^0.1.0",
+    "node-sass": "",
     "react-jade": "^2.4.0",
-    "sass-loader": "^1.0.2",
+    "sass-loader": "",
     "style-loader": "^0.11.0",
     "stylus-loader": "^1.1.0",
     "url-loader": "^0.5.6",

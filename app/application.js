@@ -7,6 +7,7 @@ import '../app/assets/scss/style.scss';
 import '../bower_components/ratchet/dist/css/ratchet.min.css';
 import '../bower_components/ratchet/dist/css/ratchet-theme-ios.min.css';
 
+console.log("Loading JuiceJuice App")
 Router.run(Routes, Router.HistoryLocation, function (Handler) {
   React.render(<Handler />, document.body);
 });
