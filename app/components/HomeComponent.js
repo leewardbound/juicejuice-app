@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import HomeStore from '../stores/HomeStore';
+import BluetoothStore from '../stores/HomeStore';
 import HomeActions from '../actions/HomeActions';
 
 function getAppState() {
   return {
-    contacts: HomeStore.getAll()
+    contacts: HomeStore.getAll(),
+    devices: DeviceStore.getAll(),
   };
 }
 
@@ -15,6 +17,7 @@ export default class HomeComponent extends Component {
   }
 
   componentDidMount() {
+    DeviceStore.startScanning();
     HomeActions.getContacts();
     HomeStore.addChangeListener(this.onChange);
   }
@@ -31,16 +34,7 @@ export default class HomeComponent extends Component {
     return (
       <div>
         <ul className='table-view'>
-        {
-          this.state.contacts.map(function(contact) {
-            return (
-              <li key={contact.id} className='table-view-cell media'>
-              <img className='media-object pull-left img-resize' src={contact.avatar}/>
-              <div className='media-body'>{contact.first} {contact.last}</div>
-              </li>
-            )
-          })
-        }
+        Home
         </ul>
       </div>
     );

@@ -1,5 +1,5 @@
 {
-  "name": "juicejuice.brain",
+  "name": "co.lwb.juicejuiceapp",
   "version": "0.1.0",
   "homepage": "https://github.com/linked/jj-brain",
   "description": "Control app for JuiceJuice LEDs",
@@ -14,7 +14,6 @@
     "react",
     "cordova"
   ],
-  "author": "Régis Gaidot <rgaidot@gmail.com>",
   "main": "app/application.js",
   "scripts": {
     "serve": "webpack-dev-server -d --config webpack.config.developement.js --content-base www/ --progress --colors --history-api-fallback",
@@ -22,15 +21,18 @@
     "lint": "eslint ./*.js ./**/*.js"
   },
   "dependencies": {
-    "bluebird": "^2.9.34",
+    "cordova-plugin-ble-central": "^1.1.0",
     "flux": "^2.0.3",
     "json-loader": "^0.5.2",
-    "keymirror": "^0.1.1",
     "lodash": "^3.7.0",
     "react": "^0.13.3",
     "react-hot-loader": "^1.2.7",
+    "react-localstorage": "",
     "react-router": "^0.13.3",
-    "request": "^2.60.0"
+    "react-timeago": "^3.0.0",
+    "request": "^2.65.0",
+    "webpack-cordova-plugin": "^0.1.6",
+    "webpack-shell-plugin": "^0.4.2"
   },
   "devDependencies": {
     "babel": "^5.4.7",
@@ -50,10 +52,7 @@
     "jade": "^1.9.2",
     "json-loader": "^0.5.1",
     "jsx-loader": "^0.13.1",
-    "karma": "^0.13.9",
-    "karma-cli": "^0.1.0",
     "node-sass": "",
-    "react-jade": "^2.4.0",
     "sass-loader": "",
     "style-loader": "^0.11.0",
     "stylus-loader": "^1.1.0",
@@ -65,6 +64,7 @@
     "cordova-plugin-device",
     "cordova-plugin-console",
     "cordova-plugin-whitelist",
-    "cordova-plugin-splashscreen"
+    "cordova-plugin-splashscreen",
+    "cordova-ble"
   ]
 }

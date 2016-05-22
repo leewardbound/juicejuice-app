@@ -1,11 +1,13 @@
 var path = require('path');
 var webpack = require("webpack");
+var CordovaPlugin = require('webpack-cordova-plugin');
+
 
 module.exports = {
   context: __dirname + '/app',
   entry: ['./application.js'],
   output: {
-    path: __dirname + 'www/',
+    path: __dirname + '/www/',
     filename: 'bundle.js'
   },
   resolve: {
@@ -18,6 +20,7 @@ module.exports = {
     tls: 'empty'
   },
   module: {
+    noParse: /node_modules\/json-schema\/lib\/validate\.js/,
     loaders: [
       {
         test: /\.(js|jsx)$/,
@@ -38,7 +41,7 @@ module.exports = {
       {
         test: /\.(png|woff|ttf|eot|svg)$/,
         loader: 'url-loader?limit=100000'
-      }
+      },
     ]
   },
   plugins: [

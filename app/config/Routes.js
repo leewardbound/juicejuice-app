@@ -4,8 +4,9 @@ import { Router, Route, RouteHandler, DefaultRoute, NotFoundRoute, State,
 import ApplicationComponent from '../components/ApplicationComponent';
 import NotFoundComponent from '../components/NotFoundComponent';
 import HomeComponent from '../components/HomeComponent';
+import ListDevicesComponent from '../components/ListDevicesComponent';
 
-const components = [];
+const components = [ListDevicesComponent];
 
 const routes = (
   <Route name="ApplicationComponent" path="/" handler={ApplicationComponent}>

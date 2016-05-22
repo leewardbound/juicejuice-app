@@ -1,6 +1,7 @@
 import { register } from '../dispatchers/ApplicationDispatcher';
 import EventEmitter from 'events';
 import ActionTypes from '../constants/ActionTypes';
+import _ from 'lodash'
 
 export default class ApplicationStore extends EventEmitter {
   constructor() {
@@ -22,9 +23,9 @@ export default class ApplicationStore extends EventEmitter {
 
   get(key) {
     if(this.data[key] === undefined) {
-      return [];
+      return {};
     } else {
-      return Array.from(this.data[key]);
+      return this.data[key];
     }
   }
 
@@ -43,12 +44,17 @@ export default class ApplicationStore extends EventEmitter {
     this.emitChange('STORE_CHANGE');
   }
 
+  clearAll() {
+    this.data = {};
+    this.emitChange('STORE_CHANGE');
+  }
+
   emitChange() {
     this.emit('STORE_CHANGE');
   }
 
   getAll() {
-    return Array.from(this.data);
+    return this.data;
   }
 }
 
