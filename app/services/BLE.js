@@ -117,13 +117,13 @@ module.export = function(cordova) {
 
     // value must be an ArrayBuffer
     writeCommand: function (device_id, service_uuid, characteristic_uuid, value, success, failure) {
-        console.log("WARNING: writeCommand is deprecated, use writeWithoutResponse");
+        window.console.log("WARNING: writeCommand is deprecated, use writeWithoutResponse");
         cordova.exec(success, failure, 'BLE', 'writeWithoutResponse', [device_id, service_uuid, characteristic_uuid, value]);
     },
 
     // success callback is called on notification
     notify: function (device_id, service_uuid, characteristic_uuid, success, failure) {
-        console.log("WARNING: notify is deprecated, use startNotification");
+        window.console.log("WARNING: notify is deprecated, use startNotification");
         cordova.exec(success, failure, 'BLE', 'startNotification', [device_id, service_uuid, characteristic_uuid]);
     },
 

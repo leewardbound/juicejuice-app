@@ -23,11 +23,13 @@ class DeviceStore extends ApplicationStore {
   }
 
   startScanning() {
-      BluetoothService.startScanning()
+      this.service = this.service || new BluetoothService()
+      this.service.startScanning()
   }
 
   stopScanning() {
-      BluetoothService.stopScanning()
+      this.service = this.service || new BluetoothService()
+      this.service.stopScanning()
   }
 }
 

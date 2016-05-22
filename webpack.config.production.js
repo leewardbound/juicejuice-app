@@ -17,6 +17,6 @@ config.plugins.push(
   })
 );
 
-config.devtool = 'eval-source-map'
+//config.devtool = 'eval-source-map'
 
 module.exports = config;

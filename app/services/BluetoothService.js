@@ -1,6 +1,5 @@
 import ApplicationDispatcher from '../dispatchers/ApplicationDispatcher';
 import request from 'request';
-import BLE from './BLE';
 import log from '../stores/log'
 
 var manager = {}
@@ -22,15 +21,9 @@ manager.initialize = function()
   return manager;
 };
 
-function startApp(BT) {
-    //BT.startScanning();
-}
-
 export default class BluetoothService {
   constructor() {
       if(!window.cordova) return log.warn('Bluetooth not available without Cordova')
-      this.driver = BLE(window.cordova)
-      this.manager = manager.initialize()
   }
 
   stopScanning() {
@@ -38,17 +31,20 @@ export default class BluetoothService {
   }
 
   startScanning() {
+      log.debug("Scheduling scanner")
       this.stopScanning();
+      this._scan_interval = setInterval(this.scan, 30*1000);
       this.scan();
-      this._scan_interval = setInterval(this.scan, 10*1000);
   }
 
   scan () {
+      this.manager = this.manager || manager.initialize()
+      log.debug("Starting a scan...")
       if(!this.manager) return;
       if (cordova.platformId === 'android') { // Android filtering is broken
-          BLE.scan([], 5, this.onDiscoverDevice, this.onError);
+          cordova.ble.scan([], 5, this.onDiscoverDevice, this.onError);
       } else {
-          BLE.scan([redbear.serviceUUID], 5, this.onDiscoverDevice, this.onError);
+          cordova.ble.scan([redbear.serviceUUID], 5, this.onDiscoverDevice, this.onError);
       }
   }
   onDiscoverDevice(device) {
@@ -63,4 +59,4 @@ export default class BluetoothService {
   }
 };
 
-export default new BluetoothService();
+export default BluetoothService;
