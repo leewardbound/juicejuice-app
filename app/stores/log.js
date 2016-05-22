@@ -36,7 +36,7 @@ class log extends ApplicationStore {
   addEntry(level, ...datum) {
     let at = new Date();
     let datum_strs = _.map(datum, (d) =>
-                          _.isObject(d) ? JSON.stringify(d) : d)
+                          _.isObject(d) ? JSON.stringify(d).replace(',', ', ') : d)
     // Console logging output
     let line = <div>
       <span style={{color: getColor(level), fontWeight: 'bold'}}>

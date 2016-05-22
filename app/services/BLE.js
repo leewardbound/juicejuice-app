@@ -47,7 +47,7 @@ function convertToNativeJS(object) {
     });
 }
 
-module.export = function(cordova) {
+export default function BLE(cordova) {
     return {
     scan: function (services, seconds, success, failure) {
         var successWrapper = function(peripheral) {

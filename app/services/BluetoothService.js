@@ -1,4 +1,5 @@
 import ApplicationDispatcher from '../dispatchers/ApplicationDispatcher';
+import BLE from './BLE'
 import request from 'request';
 import log from '../stores/log'
 
@@ -26,32 +27,28 @@ export default class BluetoothService {
       if(!window.cordova) return log.warn('Bluetooth not available without Cordova')
   }
 
+  driver() {
+      return this._driver = this._driver || BLE(cordova)
+  }
+
   stopScanning() {
-      clearInterval(this._scan_interval);
+      this.driver().stopScan()
   }
 
   startScanning() {
-      log.debug("Scheduling scanner")
-      this.stopScanning();
-      this._scan_interval = setInterval(this.scan, 30*1000);
-      this.scan();
+      log.debug("Starting the scanner")
+      let services = [manager.RBL_SERVICE_UUID];
+      if (cordova.platformId === 'android')  // Android filtering is broken
+          services = []
+      this.driver().startScan(services, this.onDeviceSeen, this.onError);
   }
-
-  scan () {
-      this.manager = this.manager || manager.initialize()
-      log.debug("Starting a scan...")
-      if(!this.manager) return;
-      if (cordova.platformId === 'android') { // Android filtering is broken
-          cordova.ble.scan([], 5, this.onDiscoverDevice, this.onError);
-      } else {
-          cordova.ble.scan([redbear.serviceUUID], 5, this.onDiscoverDevice, this.onError);
-      }
+  onDeviceSeen(device) {
+      if(!_.isObject(manager.devices[device.id]))
+          log.debug('Found device: ', device)
+      manager.devices[device.id] = device;
   }
-  onDiscoverDevice(device) {
-      log.debug('Found device: ', device)
-  }
-  onError(device) {
-      log.debug('Scanning error: ', error)
+  onError(error) {
+      log.error('Scanning error: ', error)
   }
   get (options = {}) {
   }
