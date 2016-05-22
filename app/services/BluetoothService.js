@@ -38,14 +38,14 @@ export default class BluetoothService {
   startScanning() {
       log.debug("Starting the scanner")
       let services = [manager.RBL_SERVICE_UUID];
-      if (cordova.platformId === 'android')  // Android filtering is broken
+      if (cordova.platformId === 'xandroid')  // Android filtering is broken
           services = []
       this.driver().startScan(services, this.onDeviceSeen, this.onError);
   }
   onDeviceSeen(device) {
-      if(!_.isObject(manager.devices[device.id]))
+      if(!_.isObject(manager.devices[device.address]))
           log.debug('Found device: ', device)
-      manager.devices[device.id] = device;
+      manager.devices[device.address] = device;
   }
   onError(error) {
       log.error('Scanning error: ', error)
