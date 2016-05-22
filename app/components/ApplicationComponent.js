@@ -9,11 +9,10 @@ export default class ApplicationComponent extends Component {
     DeviceStore.startScanning()
     return <div>
         <header className='bar bar-nav'>
-          <h1 className='title'>react-cordova</h1>
+          <h1 className='title'>JuiceJuice</h1>
         </header>
         <section id='main' className='content'>
           <RouteHandler />
-          <LogViewer />
         </section>
         <footer className='bar bar-tab'>
           <Link className='tab-item' to="home">
@@ -23,6 +22,10 @@ export default class ApplicationComponent extends Component {
           <Link className='tab-item' to="devices">
             <span className="icon icon-star"></span>
             <span className="tab-label">Devices</span>
+          </Link>
+          <Link className='tab-item' to="logs">
+            <span className="icon icon-list"></span>
+            <span className="tab-label">Logs</span>
           </Link>
         </footer>
      </div>;

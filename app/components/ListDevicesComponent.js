@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import LocalStorageMixin from 'react-localstorage';
 import DeviceStore from '../stores/DeviceStore';
 import LocalStore from '../stores/LocalStore';
+import log from '../stores/log';
 import HomeActions from '../actions/HomeActions';
 import _ from 'lodash';
 
@@ -18,7 +19,6 @@ export default class ListDevicesComponent extends Component {
   }
 
   componentDidMount() {
-    //HomeActions.getDevices();
     DeviceStore.addChangeListener(this.onChange);
   }
 
@@ -31,29 +31,30 @@ export default class ListDevicesComponent extends Component {
   }
 
   render() {
-    let addone = function() {
-        let d = {'first': 'lee', 'last': 'bound', 'id': Math.random() * 123};
-        DeviceStore.set(Math.random(), d)
-    }
     let clearall = function() {
         DeviceStore.clearAll()
     }
     localStorage.state = JSON.stringify(this.state)
+    let click = function(device) {
+        return function() {
+            log.info('Sending')
+            DeviceStore.send_message(device, 'hi')
+        }
+    }
     return (
       <div>
         <ul className='table-view'>
         {
-          _.map(this.state.devices || [], function(contact) {
+          _.map(this.state.devices || [], function(device) {
                 return (
-                  <li key={contact.id} className='table-view-cell media'>
-                  <div className='media-body'>{contact.first} {contact.last}</div>
+                  <li key={device.address} className='table-view-cell media'>
+                  <div className='media-body'>{device.name} <br />{device.rssi}</div>
+                  <a onClick={click(device)}>Connect</a>
                   </li>
                 )
               })
             }
         </ul>
-        <a onClick={addone}>Add One</a>
-        <br /><br /><br />
         <a onClick={clearall}>Clear All</a>
       </div>
     );

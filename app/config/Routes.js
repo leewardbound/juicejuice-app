@@ -5,8 +5,9 @@ import ApplicationComponent from '../components/ApplicationComponent';
 import NotFoundComponent from '../components/NotFoundComponent';
 import HomeComponent from '../components/HomeComponent';
 import ListDevicesComponent from '../components/ListDevicesComponent';
+import LogViewer from '../components/LogViewer';
 
-const components = [ListDevicesComponent];
+const components = [ListDevicesComponent, LogViewer];
 
 const routes = (
   <Route name="ApplicationComponent" path="/" handler={ApplicationComponent}>
@@ -15,7 +16,7 @@ const routes = (
         path={component.config.path}
         handler={component} key={component.config.name} />;
     })}
-    <DefaultRoute handler={HomeComponent} name='home' key='home' />
+    <DefaultRoute handler={ListDevicesComponent} name='home' key='home' />
     <NotFoundRoute name="404" handler={NotFoundComponent} />
   </Route>
 );

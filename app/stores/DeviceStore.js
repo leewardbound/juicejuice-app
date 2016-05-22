@@ -24,13 +24,29 @@ class DeviceStore extends ApplicationStore {
 
   startScanning() {
       this.service = this.service || new BluetoothService()
-      this.service.startScanning()
+
+      let store = this;
+
+      function updateDevice(device, devices) {
+          store.set(device.address, device)
+      }
+      this.service.startScanning(updateDevice)
   }
 
   stopScanning() {
       this.service = this.service || new BluetoothService()
       this.service.stopScanning()
   }
+
+  send_message(device, data, success) {
+      this.service.connect(device.address,
+          () => this.emitChange(),
+          () => this.service.sendData(device, data,
+                () => this.service.disconnect(device, 'Finished send_message',
+                      () => _.isFunction(success) && success()))
+      )
+  }
+
 }
 
 export default new DeviceStore();

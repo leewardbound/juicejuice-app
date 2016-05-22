@@ -36,12 +36,13 @@ class log extends ApplicationStore {
   addEntry(level, ...datum) {
     let at = new Date();
     let datum_strs = _.map(datum, (d) =>
-                          _.isObject(d) ? JSON.stringify(d).replace(',', ', ') : d)
+                          _.isObject(d) ? (JSON.stringify(d) || "(empty object)").replace(',', ', ') : d)
     // Console logging output
+    let string = datum_strs.join(' ');
     let line = <div>
       <span style={{color: getColor(level), fontWeight: 'bold'}}>
-      <TimeAgo date={at} /> | {level}
-      </span> {datum_strs.join(' ')}
+      {at.toString()} | {level}
+      </span> {string}
     </div>
     let entry = {
         'at': at,
@@ -51,7 +52,7 @@ class log extends ApplicationStore {
         'color': getColor(level),
     }
     entry.id = this.data.length
-    _.map(datum, (d) => window.console[level](d))
+    window.console[level](string)
     this.data.push(entry);
     this.emitChange();
   }
@@ -62,8 +63,8 @@ class log extends ApplicationStore {
   warn(...datum) { this.addEntry('warn', ...datum) }
   error(...datum) { this.addEntry('error', ...datum) }
 
-  history(limit=10) {
-      return _.slice(this.data, -10, 10).reverse()
+  history(limit=6) {
+      return _.slice(this.data.reverse(), 0, limit)
   }
 
 }
